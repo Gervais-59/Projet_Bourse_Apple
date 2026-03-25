@@ -191,8 +191,75 @@ print(jack.afficher_bons_restants())
 # On peut maintenant utiliser le chaînage (Method Chaining) que tu as appris !
 print("\n--- Achats de Jack ---")
 jack.ajouter_depense(10).affiche_depense() # Utilise un bon (ajoute 9)
-jack.ajouter_depense(10).affiche_depense() # Utilise un bon (ajoute 9)
-jack.ajouter_depense(10).affiche_depense() # Utilise un dernier bon (ajoute 9)
+jack.ajouter_depense(100).affiche_depense() # Utilise un bon (ajoute 9)
+jack.ajouter_depense(200).affiche_depense() # Utilise un dernier bon (ajoute 9)
 
 # Plus de bons !
 jack.ajouter_depense(10).affiche_depense() # Tarif normal (ajoute 10 via le super())
+
+
+####### Class Livre
+
+class Livre:
+     def __init__(self,titre,auteur,est_disponible=True):
+          self.titre=titre
+          self.auteur=auteur
+          self.disponible=est_disponible
+    
+     def emprunter(self):
+          if self.disponible:
+               self.disponible=False
+               print(f"Le livre {self.titre} a été emprunté")
+               return True
+          else:
+               print(f"Désolé, le livre {self.titre} n'est pas disponible")
+               return False
+     def rendre(self):
+          self.disponible=True
+          print(f"Le livre {self.titre} a été rendu")
+     
+class BandeDessinee(Livre):
+     
+     def __init__(self, titre, auteur,dessinateur):
+          self.dessinateur=dessinateur
+          super().__init__(titre, auteur)
+     
+     def afficher_details(self):
+          print(f"BD : {self.titre} | Scénario : {self.auteur}| Dessin : {self.dessinateur}")
+
+#### classe Lecteur
+class Lecteur:
+     
+     def __init__(self,nom,collection=[]):
+          self.nom=nom
+          self.collection=[]
+          for p in collection:
+               self.collection.append(p)
+
+     def prendre_livre(self, un_livre):
+          
+          if un_livre.emprunter():
+               self.collection.append(un_livre.titre)
+          return self.collection
+     
+
+
+          
+## 
+# 1. On crée une BD
+bd1 = BandeDessinee("Titeuf", "Zep", "Zep")
+bd2 = BandeDessinee("Astérix", "Goscinny", "Uderzo")
+
+# 2. On crée un lecteur
+lecteur1 = Lecteur("Gervais")
+
+# 3. Gervais emprunte Astérix
+lecteur1.prendre_livre(bd2)
+
+# 4. On vérifie les détails
+print(bd2.afficher_details())
+
+# 5. Quelqu'un d'autre essaie d'emprunter Astérix (ça devrait afficher que c'est déjà pris !)
+print(bd2.emprunter())
+    
+     
