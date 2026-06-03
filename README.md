@@ -1,0 +1,1 @@
+Projet de prévision de l'action APPLE via le Temporal Fusion Transformer (TFT). Face au bruit boursier, le TFT surpasse les modèles classiques (LSTM) grâce à 4 forces : fusion de données hétérogènes, sélection dynamique des variables, prévision probabiliste par quantiles (gestion du risque) et haute interprétabilité (sans boîte noire).
